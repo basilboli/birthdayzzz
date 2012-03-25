@@ -12,10 +12,10 @@ WHAT IT DOES:
 WHAT IT DOESN'T:
 - it doesn't persist ANY data to ANY database
 
-Howto deploy instuctions:
+DEPLOY:
 0. before using you should get you access_token 
 (see https://developers.facebook.com/docs/authentication/)
 1. run main.py once or use cron for automatic daily launch
 
-Open issues:
+OPEN ISSUES:
 token should be updated every x days as fb got rid of offline_access

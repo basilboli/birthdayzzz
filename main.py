@@ -9,9 +9,12 @@ from datetime import datetime,date
 import random
 import sys
 
-TOKEN='YOUR_TOKEN'
-ALL_FRIENDS_URL='https://graph.facebook.com/YOUR_ID/friends?fields=name,birthday&access_token='+TOKEN
-FRIEND_WALL_URL='graph.facebook.com'
+YOUR_ID='632735851'
+ACCESS_TOKEN='AAACb8n2uW5MBAFZCNvmPLHZCntYw0AyUUefnYSBpntBeuujxhqtjaJqZCaGRKg5SNHXz70zRKntuUhvZCwQaDvKYRCYZA9BY6Aa7IAEZCMOgZDZD'
+
+FB_API_URL='graph.facebook.com'
+MY_INFO_URL='https://graph.facebook.com/'+YOUR_ID+'?access_token='+ACCESS_TOKEN
+MY_FRIENDS_URL='https://graph.facebook.com/'+YOUR_ID+'/friends?fields=name,birthday&access_token='+ACCESS_TOKEN
 BIRTHDAYS_LIMIT=5
 
 def happy_birthday():
@@ -20,20 +23,21 @@ def happy_birthday():
 
 def get_today_birthdays ():
 	birthdays_today=[]
-	friends= urllib.urlopen(ALL_FRIENDS_URL).read()
+	print 'requesting url',MY_FRIENDS_URL
+	friends= urllib.urlopen(MY_FRIENDS_URL).read()
 	items = json.loads(friends).get('data')
 	for item in items:
 		birthday=item.get('birthday')
-		if birthday and is_today(birthday):#if person shares its birthday AND it's today
+		if birthday and is_today(birthday): #if person shares its birthday AND it's today
 			birthdays_today.append(item)
 	print "today:", birthdays_today
 	return birthdays_today	 
 	
 def send_congrats (persons):
 	count = 0
-	params = urllib.urlencode({'access_token': TOKEN,'message': get_random_message()})
+	params = urllib.urlencode({'access_token': ACCESS_TOKEN,'message': get_random_message()})
 	headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
-	conn = httplib.HTTPSConnection(FRIEND_WALL_URL)
+	conn = httplib.HTTPSConnection(FB_API_URL)
 
 	for person in persons:
 		if count > BIRTHDAYS_LIMIT: # foolproof feature
@@ -68,11 +72,10 @@ def is_today (str):
 def get_random_message():
 	messages = open('texts','r').readlines()
 	line_no = random.randint(1,len(messages)-1)
-	print "choosing phrase...",messages[line_no] 
+	print "Choosing congratulations phrase...",messages[line_no] 
 	return messages[line_no]
-		
+
 if __name__ == "__main__":
-	#happy_birthday()
-	get_today_birthdays()
+	happy_birthday()
 	
 	
