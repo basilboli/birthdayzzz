@@ -9,8 +9,8 @@ from datetime import datetime,date
 import random
 import sys
 
-YOUR_ID='632735851'
-ACCESS_TOKEN='AAACb8n2uW5MBAFZCNvmPLHZCntYw0AyUUefnYSBpntBeuujxhqtjaJqZCaGRKg5SNHXz70zRKntuUhvZCwQaDvKYRCYZA9BY6Aa7IAEZCMOgZDZD'
+YOUR_ID='XXXXX'
+ACCESS_TOKEN='XXXX'
 
 FB_API_URL='graph.facebook.com'
 MY_INFO_URL='https://graph.facebook.com/'+YOUR_ID+'?access_token='+ACCESS_TOKEN
